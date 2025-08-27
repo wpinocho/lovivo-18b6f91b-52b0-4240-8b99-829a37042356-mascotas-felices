@@ -2,7 +2,24 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
-  console.log("Hero component rendered");
+  console.log("🦸 Hero component rendered successfully");
+  console.log("🎨 Hero component - Displaying main banner");
+
+  const handleProductsClick = () => {
+    console.log("🛍️ 'Ver Productos' button clicked in Hero");
+    // Scroll to products section
+    const productsSection = document.querySelector('[data-section="products"]');
+    if (productsSection) {
+      console.log("📍 Scrolling to products section");
+      productsSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.log("⚠️ Products section not found");
+    }
+  };
+
+  const handleServicesClick = () => {
+    console.log("🔧 'Nuestros Servicios' button clicked in Hero");
+  };
 
   return (
     <section className="bg-gradient-to-r from-blue-50 to-indigo-100 py-20">
@@ -18,11 +35,11 @@ export const Hero = () => {
               Calidad garantizada y los mejores precios.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="text-lg px-8 py-6">
+              <Button size="lg" className="text-lg px-8 py-6" onClick={handleProductsClick}>
                 Ver Productos
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-6">
+              <Button variant="outline" size="lg" className="text-lg px-8 py-6" onClick={handleServicesClick}>
                 Nuestros Servicios
               </Button>
             </div>

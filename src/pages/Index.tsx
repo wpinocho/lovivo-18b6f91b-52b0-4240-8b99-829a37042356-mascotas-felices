@@ -9,7 +9,16 @@ import { CartProvider } from "@/contexts/CartContext";
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  console.log("Index page rendered with category:", selectedCategory);
+  console.log("🏠 Index page rendered with category:", selectedCategory);
+  console.log("📊 Index page state:", { selectedCategory });
+
+  const handleCategoryChange = (category: string) => {
+    console.log("🔄 Category change requested from:", selectedCategory, "to:", category);
+    setSelectedCategory(category);
+    console.log("✅ Category changed successfully to:", category);
+  };
+
+  console.log("🎯 Index page about to render components");
 
   return (
     <CartProvider>
@@ -18,7 +27,7 @@ const Index = () => {
         <Hero />
         <Categories 
           selectedCategory={selectedCategory} 
-          onCategoryChange={setSelectedCategory} 
+          onCategoryChange={handleCategoryChange} 
         />
         <ProductGrid selectedCategory={selectedCategory} />
         <Footer />

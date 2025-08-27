@@ -30,20 +30,34 @@ const products: Product[] = [
 ];
 
 export const ProductGrid: React.FC<ProductGridProps> = ({ selectedCategory }) => {
+  console.log("🛍️ ProductGrid component rendered");
+  console.log("🎯 ProductGrid - Selected category:", selectedCategory);
+  console.log("📦 ProductGrid - Total products available:", products.length);
+
   const filteredProducts = selectedCategory === "all" 
     ? products 
     : products.filter(product => product.category === selectedCategory);
 
-  console.log("ProductGrid rendered with category:", selectedCategory, "showing", filteredProducts.length, "products");
+  console.log("🔍 ProductGrid - Filtered products count:", filteredProducts.length);
+  console.log("📋 ProductGrid - Filtered products:", filteredProducts.map(p => ({ id: p.id, name: p.name, category: p.category })));
+
+  if (filteredProducts.length === 0) {
+    console.log("⚠️ ProductGrid - No products found for category:", selectedCategory);
+  } else {
+    console.log("✅ ProductGrid - Products found, rendering grid");
+  }
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50" data-section="products">
       <div className="container mx-auto px-4">
         <h3 className="text-3xl font-bold text-center mb-12">Nuestros Productos</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {filteredProducts.map((product) => {
+            console.log("🎴 Rendering ProductCard for:", product.name);
+            return (
+              <ProductCard key={product.id} product={product} />
+            );
+          })}
         </div>
         {filteredProducts.length === 0 && (
           <div className="text-center py-12">

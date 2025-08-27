@@ -10,7 +10,28 @@ export const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { getTotalItems } = useCart();
 
-  console.log("Header rendered, cart items:", getTotalItems());
+  console.log("🎯 Header component rendered");
+  console.log("🛒 Header - Cart items count:", getTotalItems());
+  console.log("📱 Header - Mobile menu open:", isMenuOpen);
+  console.log("🛍️ Header - Cart drawer open:", isCartOpen);
+
+  const handleMenuToggle = () => {
+    console.log("📱 Menu toggle clicked, current state:", isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
+    console.log("📱 Menu state changed to:", !isMenuOpen);
+  };
+
+  const handleCartOpen = () => {
+    console.log("🛒 Cart button clicked, opening cart drawer");
+    setIsCartOpen(true);
+    console.log("🛍️ Cart drawer opened");
+  };
+
+  const handleCartClose = () => {
+    console.log("❌ Cart drawer close requested");
+    setIsCartOpen(false);
+    console.log("✅ Cart drawer closed");
+  };
 
   return (
     <>
@@ -45,7 +66,7 @@ export const Header = () => {
                 variant="ghost" 
                 size="icon" 
                 className="relative"
-                onClick={() => setIsCartOpen(true)}
+                onClick={handleCartOpen}
               >
                 <ShoppingCart className="h-5 w-5" />
                 {getTotalItems() > 0 && (
@@ -58,7 +79,7 @@ export const Header = () => {
                 variant="ghost"
                 size="icon"
                 className="md:hidden"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={handleMenuToggle}
               >
                 {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
@@ -79,7 +100,7 @@ export const Header = () => {
         </div>
       </header>
 
-      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartDrawer isOpen={isCartOpen} onClose={handleCartClose} />
     </>
   );
 };
